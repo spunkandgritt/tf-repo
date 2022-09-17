@@ -13,16 +13,12 @@ on: [pull_request]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: mainnet
     steps:
       - name: CHECKOUT
         uses: actions/checkout@v2
       - name: Get Pull Request Number
         id: pr
-        run: if [ $API_KEY == "ABCDEF1234" ]
-          then
-            echo "a is equal to b"
-          else
-            echo "a is not equal to b"
-          fi
+        run: ./.github/scripts/check-env.sh
         env:
           API_KEY: ${{ secrets.API_KEY }}
